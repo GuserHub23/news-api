@@ -20,11 +20,14 @@ const NoticiasProvider = ({children}) => {
     const urlPaises = 'https://restcountries.com/v3.1/all'
 
     const consultarApi = async () => {
-        const { data : dataPaises } = await axios(urlPaises)
         const { data } = await axios(url)
         setNoticias(data.articles)
         setTotalNoticias(data.totalResults)
-        setPaises( dataPaises)
+    }
+    
+    const consultarApiPaises = async () => {
+        const { data } = await axios(urlPaises)
+        setPaises( data)
     }
 
     useEffect(() => {
@@ -40,6 +43,7 @@ const NoticiasProvider = ({children}) => {
         try {
             setPagina(1)
             consultarApi()
+            consultarApiPaises()
         } catch (error) {
             setError(true)
         }
