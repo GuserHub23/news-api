@@ -34,8 +34,17 @@ const NoticiasProvider = ({children}) => {
         } catch (error) {
             setError(true)
         }
-    }, [categoria, pais])
-
+    }, [ categoria ])
+    
+    useEffect(() => {
+        try {
+            setPagina(1)
+            consultarApi()
+        } catch (error) {
+            setError(true)
+        }
+    }, [ pais ])
+    
     useEffect(() => {
         try {
             consultarApi()
